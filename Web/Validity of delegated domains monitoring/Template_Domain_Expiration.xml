@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.4</version>
+    <date>2019-10-30T08:12:01Z</date>
+    <groups>
+        <group>
+            <name>Templates/Web</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Domain Expiration</template>
+            <name>Template Domain Expiration</name>
+            <groups>
+                <group>
+                    <name>Templates/Web</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Domain</name>
+                </application>
+            </applications>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Domain discovery</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>domain.discovery</key>
+                    <delay>300</delay>
+                    <filter>
+                        <conditions>
+                            <condition>
+                                <macro>{#DOMAIN}</macro>
+                                <value>.*</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>1d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Domain $1 expire after</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>domain.expire[{#DOMAIN}]</key>
+                            <delay>3600</delay>
+                            <history>2d</history>
+                            <trends>2d</trends>
+                            <applications>
+                                <application>
+                                    <name>Domain</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}&lt;7</expression>
+                                    <name>Domain {#DOMAIN} expires in {ITEM.VALUE} days</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+        </template>
+    </templates>
+</zabbix_export>

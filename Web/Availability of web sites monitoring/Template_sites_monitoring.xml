@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.4</version>
+    <date>2019-10-14T13:32:59Z</date>
+    <groups>
+        <group>
+            <name>Templates/Web</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Sites Monitoring</template>
+            <name>Template Sites Monitoring</name>
+            <description>#6afff3 - download color&#13;
+#bf71ff - upload color</description>
+            <groups>
+                <group>
+                    <name>Templates/Web</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Sites Monitoring</name>
+                </application>
+            </applications>
+            <httptests>
+                <httptest>
+                    <name>github.com</name>
+                    <application>
+                        <name>Sites Monitoring</name>
+                    </application>
+                    <attempts>3</attempts>
+                    <status>DISABLED</status>
+                    <steps>
+                        <step>
+                            <name>index</name>
+                            <url>https://github.com</url>
+                            <follow_redirects>NO</follow_redirects>
+                            <required>2019 GitHub, Inc.</required>
+                            <status_codes>200</status_codes>
+                        </step>
+                    </steps>
+                </httptest>
+            </httptests>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <expression>{Template Sites Monitoring:web.test.fail[github.com].avg(#3)}&gt;=1</expression>
+            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+            <recovery_expression>{Template Sites Monitoring:web.test.fail[github.com].last()}=0</recovery_expression>
+            <name>Site github.com is down</name>
+            <priority>HIGH</priority>
+        </trigger>
+    </triggers>
+    <graphs>
+        <graph>
+            <name>Download speed for step &quot;index&quot; of scenario &quot;github.com&quot;</name>
+            <width>600</width>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>6AFFF3</color>
+                    <calc_fnc>MIN</calc_fnc>
+                    <item>
+                        <host>Template Sites Monitoring</host>
+                        <key>web.test.in[github.com,index,bps]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Response time for step &quot;index&quot; of scenario &quot;github.com&quot;</name>
+            <width>600</width>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>BF00FF</color>
+                    <calc_fnc>MIN</calc_fnc>
+                    <item>
+                        <host>Template Sites Monitoring</host>
+                        <key>web.test.time[github.com,index,resp]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
