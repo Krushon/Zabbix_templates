@@ -37,7 +37,7 @@
 
 **Возможные проблемы**
 
-1. Некоторые ssl-сертификаты не определяются, скрипт выводит 0 при действующем сертификате - см. [Issues #1](https://github.com/Krushon/Zabbix-Web-Templates/issues/1)
+1. Некоторые ssl-сертификаты не определяются, скрипт выводит 0 при действующем сертификате - см. [Issues #1](https://github.com/Krushon/Zabbix_templates/issues/1)
 
 
 _______
