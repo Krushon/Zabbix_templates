@@ -17,11 +17,13 @@
 
 **Установка и настройка**
 1. На машине с openvpn и настроенным zabbix-agent сохраняем скрипт *discover_vpn.sh* в папку **/etc/zabbix/scripts** (если папки нет - создаём) и даём ему права на запуск.<br>
-`chown zabbix. discover_vpn.sh && chmod +x discover_vpn.sh`<br>
+`# chown zabbix. discover_vpn.sh && chmod +x discover_vpn.sh`<br>
 *По необходимости нужно исправить путь до директории ccd, заданный в конфиге openvpn параметром client-config-dir*
 
 2. Сохраняем конфиг *openvpn.conf* в папку **/etc/zabbix/zabbix_agent.d/**.<br>
 *По необходимости нужно исправить путь до файла openvpn-status.log*
+<br> Нужно дать права на openvpn-status.log заббиксу на чтение.<br>
+`# chmod 644 /etc/openvpn/openvpn-status.log`<br>
 
 3. Перезапускаем агента<br>
 `# systemctl restart zabbix-agent`
