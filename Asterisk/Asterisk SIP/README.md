@@ -16,8 +16,9 @@
 6. Количество активных разговоров в данный момент.
 
 **Установка и настройка**
-1. Устанавливаем пакет - Язык шаблонного сканирования и обработки awk:<br>
-`# apt-get install gawk`
+1. Устанавливаем пакеты - "Язык шаблонного сканирования и обработки awk" и "Предоставление частичных привилегий суперпользователя другим пользователям":<br>
+`# apt-get install gawk sudo`<br>
+1.1. Добавляем в /etc/sudoers: `zabbix ALL = NOPASSWD: /usr/sbin/asterisk`
 
 2. На машине с asterisk и настроенным zabbix-agent сохраняем скрипт *asterisk.trunk-with-name.sh* в папку **/etc/zabbix/scripts** (если папки нет - создаём). Даём скрипту права на запуск.
 
@@ -30,3 +31,8 @@
 `# systemctl restart zabbix-agent`
 
 5. Импортируем шаблон *Template_Asterisk_sip.xml* в zabbix-server, создаём хост и привязываемся к шаблону.
+
+**Возможные проблемы**
+
+1. Если новый item не работает, получает статус not supported, а в описании причины ошибка:
+`Unable to connect to remote asterisk (does /var/run/asterisk/asterisk.ctl exist?)` - см. [Issues #2](https://github.com/Krushon/Zabbix_templates/issues/2)
