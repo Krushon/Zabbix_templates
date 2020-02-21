@@ -11,4 +11,5 @@ if [ $active -lt $total ]
 then
 echo Trunks offline $offline
 else
-	
+echo All trunks are online
+fi
