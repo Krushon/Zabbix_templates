@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.4</version>
+    <date>2020-02-28T13:02:10Z</date>
+    <groups>
+        <group>
+            <name>Templates/VOIP phones</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Grandstream2</template>
+            <name>Template Grandstream2</name>
+            <groups>
+                <group>
+                    <name>Templates/VOIP phones</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Grandstream</name>
+                </application>
+            </applications>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Grandstream2 discovery</name>
+                    <key>grandstream2.discovery</key>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Grandstream $1 registration</name>
+                            <key>grandstream2.reg[{#GRNDSTRM2}]</key>
+                            <applications>
+                                <application>
+                                    <name>Grandstream</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=0</expression>
+                                    <name>Grandstream {#GRNDSTRM2} not registered</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+        </template>
+    </templates>
+</zabbix_export>
